@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+
+    <style>
+        .container{
+            background-color: rgb(103, 2, 103);
+            color: white;
+            max-width: 400px;
+            height: 300px;
+            box-shadow: 5px 10px 8px 10px #1d1d1d;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+
+        body{
+            background-color: rgb(65, 6, 65);
+        }
+
+        button{
+            background-color: rgb(65, 6, 65);
+            color: white;
+            margin-top: 20px;
+            margin-left: 60px;
+            box-shadow:2px 3px 2px 2px #1d1d1d;
+
+        }
+
+        #result{
+            font-size: larger;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        #BMI{
+            padding: 10px;
+        }
+
+        #Reset{
+            padding: 10px 30px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; margin-top: 15px;">BMI Calculator</h1>
+        <form action="">
+            <label style="font-size: large;" for="weight">Weight (kg):</label><br>
+            <input style="padding: 5px; background-color: rgb(65, 6, 65); color: white;" type="number" id="weight" name="weight" placeholder="Enter your weight"><br>
+
+            <label style="font-size: large;" for="height">Height (cm):</label><br>
+            <input style="padding: 5px; background-color: rgb(65, 6, 65); color: white;" type="number" id="height" name="height" placeholder="Enter your height"><br>
+        </form>
+
+        <button id="BMI" onclick="szamol()">Calculate BMI</button>
+        <button id="Reset" onclick="torol()">Reset</button>
+
+        <div id="result">Your BMI:</div>
+
+        <script>
+            const intervals=[
+                {min:0,max:18.5, category:'Underweight', emoji:'🦴'},
+                {min:18.5,max:24.9, category:'Normal weight', emoji:'👍🏻'},
+                {min:25,max:29.9, category:'Overweight', emoji:'🍗'},
+                {min:30,max:34.9, category:'Obese', emoji:'🦍'},
+                {min:35, category:'Extremely Obese', emoji:'💀'}
+            ]
+
+            let bmi = 19.55
+            let interval = intervals.find(obj=>bmi>=obj.min && bmi<obj.max)
+            console.log(interval)
+            console.log(interval.emoji, interval.category);
+
+
+
+            function szamol(){
+                let calcWeight = +document.getElementById('weight').value
+                let calcHeight = +document.getElementById('height').value/100
+                let calcBMI = calcWeight/calcHeight**2
+
+                let interval = intervals.find(obj=>calcBMI>=obj.min && calcBMI<obj.max)
+                document.getElementById('result').innerHTML = interval.category + " " + interval.emoji;
+            }
+
+            function torol(){
+                let deleteWeight = document.getElementById('weight').value = " ";
+                let deleteHeight = document.getElementById('height').value = " ";
+            }
+        </script>
+    </div>
+</body>
+</html>
