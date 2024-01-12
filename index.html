@@ -140,10 +140,10 @@
                     { min: 35, max: 100, category: 'Extremely Obese', emoji: '💀' }
                 ]
 
-                let bmi = 19.55
+                /*let bmi = 19.55
                 let interval = intervals.find(obj => bmi >= obj.min && bmi < obj.max)
                 console.log(interval)
-                console.log(interval.emoji, interval.category);
+                console.log(interval.emoji, interval.category);*/
 
 
 
@@ -151,6 +151,10 @@
                     let calcWeight = +document.getElementById('weight').value
                     let calcHeight = +document.getElementById('height').value / 100
                     let calcBMI = calcWeight / calcHeight ** 2
+
+                    if(weight||height==""){
+                        document.getElementById('result').innerHTML = "Oops! Something went wrong!";
+                    }
 
                     let interval = intervals.find(obj => calcBMI >= obj.min && calcBMI < obj.max)
                     document.getElementById('result').innerHTML = interval.category + " " + interval.emoji;
@@ -160,6 +164,11 @@
                     document.getElementById('weight').value = " ";
                     document.getElementById('height').value = " ";
                     document.getElementById('result').innerHTML = "Your BMI:";
+
+                    if(weight||height==""){
+                        document.getElementById('result').innerHTML = "Your BMI:";
+                    }
+
                 }
             </script>
         </div>
